@@ -28,4 +28,11 @@ final class Specification
     public function isSatisfiedBy($candidate) {
         return isset($candidate[$this->key]) && $candidate[$this->key] === $this->value;
     }
+
+    /**
+     * @return Specification
+     */
+    public function not() {
+        return new NegativeSpecification($this);
+    }
 }

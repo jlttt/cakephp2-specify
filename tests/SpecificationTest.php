@@ -21,4 +21,10 @@ final class SpecificationTest extends TestCase {
         $candidate = ['foo' => 'baz'];
         $this->assertFalse($specification->isSatisfiedBy($candidate));
     }
+
+   public function testNegateSpecification() {
+       $specification = (new Specification('foo', 'bar'))->not();
+       $candidate = ['foo' => 'bar'];
+       $this->assertFalse($specification->isSatisfiedBy($candidate));
+   }
 }
