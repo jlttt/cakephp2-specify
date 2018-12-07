@@ -4,7 +4,7 @@
 namespace jlttt\Specify;
 
 
-final class Specification implements SpecificationInterface
+final class Specification extends AbstractSpecification
 {
     /**
      * @var key associated to the specification
@@ -27,12 +27,5 @@ final class Specification implements SpecificationInterface
      */
     public function isSatisfiedBy($candidate) {
         return isset($candidate[$this->key]) && $candidate[$this->key] === $this->value;
-    }
-
-    /**
-     * @return SpecificationInterface
-     */
-    public function not() {
-        return new NegativeSpecification($this);
     }
 }

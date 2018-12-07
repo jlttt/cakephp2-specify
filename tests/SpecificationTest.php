@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 use jlttt\Specify\Specification;
 
 final class SpecificationTest extends TestCase {
+    
     public function testSatisfiedBySimpleCandidate() {
         $specification = new Specification('foo', 'bar');
         $candidate = ['foo' => 'bar'];
@@ -24,7 +25,7 @@ final class SpecificationTest extends TestCase {
 
     public function testNegatedSpecification() {
        $specification = (new Specification('foo', 'bar'))->not();
-       $candidate = ['foo' => 'bar'];
+       $candidate = ['firstKey' => 'firstValue', 'foo' => 'bar', 'secondKey' => 'secondValue'];
        $this->assertFalse($specification->isSatisfiedBy($candidate));
     }
 
@@ -32,5 +33,11 @@ final class SpecificationTest extends TestCase {
         $specification = (new Specification('foo', 'bar'))->not()->not();
         $candidate = ['foo' => 'bar'];
         $this->assertTrue($specification->isSatisfiedBy($candidate));
+    }
+
+    public function testConjonctiveSpecificationNotSatisfied() {
+        $specification = (new Specification('foo', 'bar'))->and(new Specification('fizz', 'buzz'));
+        $candidate = ['foo' => 'bar'];
+        $this->assertFalse($specification->isSatisfiedBy($candidate));
     }
 }

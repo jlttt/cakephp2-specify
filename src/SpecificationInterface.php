@@ -13,7 +13,7 @@ interface SpecificationInterface
     public function isSatisfiedBy($candidate);
 
     /**
-     * @return SpecificationInterface
+     * @return NegativeSpecification
      */
     public function not();
 }
