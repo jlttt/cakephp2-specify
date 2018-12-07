@@ -19,4 +19,11 @@ abstract class AbstractSpecification implements SpecificationInterface
     public function and(SpecificationInterface $specification) {
         return new ConjunctiveSpecification($this, $specification);
     }
+
+    /**
+     * @return DisjunctiveSpecification
+     */
+    public function or(SpecificationInterface $specification) {
+        return new DisjunctiveSpecification($this, $specification);
+    }
 }
