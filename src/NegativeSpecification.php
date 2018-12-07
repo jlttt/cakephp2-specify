@@ -4,15 +4,15 @@
 namespace jlttt\Specify;
 
 
-final class NegativeSpecification
+final class NegativeSpecification implements SpecificationInterface
 {
     /**
-     * @var Specification
+     * @var SpecificationInterface
      */
     private $specification;
 
 
-    public function __construct(Specification $specification) {
+    public function __construct(SpecificationInterface $specification) {
         $this->specification = $specification;
     }
 
@@ -22,5 +22,12 @@ final class NegativeSpecification
      */
     public function isSatisfiedBy($candidate) {
         return !$this->specification->isSatisfiedBy($candidate);
+    }
+
+    /**
+     * @return SpecificationInterface
+     */
+    public function not() {
+        return new NegativeSpecification($this);
     }
 }

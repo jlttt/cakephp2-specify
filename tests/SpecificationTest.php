@@ -22,9 +22,15 @@ final class SpecificationTest extends TestCase {
         $this->assertFalse($specification->isSatisfiedBy($candidate));
     }
 
-   public function testNegateSpecification() {
+    public function testNegatedSpecification() {
        $specification = (new Specification('foo', 'bar'))->not();
        $candidate = ['foo' => 'bar'];
        $this->assertFalse($specification->isSatisfiedBy($candidate));
-   }
+    }
+
+    public function testTwiceNegatedSpecification() {
+        $specification = (new Specification('foo', 'bar'))->not()->not();
+        $candidate = ['foo' => 'bar'];
+        $this->assertTrue($specification->isSatisfiedBy($candidate));
+    }
 }

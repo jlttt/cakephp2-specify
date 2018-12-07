@@ -4,7 +4,7 @@
 namespace jlttt\Specify;
 
 
-final class Specification
+final class Specification implements SpecificationInterface
 {
     /**
      * @var key associated to the specification
@@ -30,7 +30,7 @@ final class Specification
     }
 
     /**
-     * @return Specification
+     * @return SpecificationInterface
      */
     public function not() {
         return new NegativeSpecification($this);
