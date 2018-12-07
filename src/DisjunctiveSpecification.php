@@ -20,6 +20,12 @@ final class DisjunctiveSpecification extends AbstractSpecification
      * @return boolean
      */
     public function isSatisfiedBy($candidate) {
-        return true;
+        return array_reduce(
+            $this->specifications,
+            function($satisfied, $specification) use ($candidate) {
+                return $satisfied || $specification->isSatisfiedBy($candidate);
+            },
+            false
+        );
     }
 }

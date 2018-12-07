@@ -52,4 +52,10 @@ final class SpecificationTest extends TestCase {
         $candidate = ['foo' => 'bar'];
         $this->assertTrue($specification->isSatisfiedBy($candidate));
     }
+
+    public function testDisjunctiveSpecificationNotSatisfied() {
+        $specification = (new Specification('fizz', 'buzz'))->or((new Specification('foo', 'bar'))->not());
+        $candidate = ['foo' => 'bar'];
+        $this->assertFalse($specification->isSatisfiedBy($candidate));
+    }
 }
