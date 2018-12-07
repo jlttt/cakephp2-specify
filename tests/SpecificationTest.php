@@ -15,4 +15,10 @@ final class SpecificationTest extends TestCase {
         $candidate = ['baz' => 'bar'];
         $this->assertFalse($specification->isSatisfiedBy($candidate));
     }
+
+    public function testNotSatisfiedBySimpleCandidateWithDifferentValue() {
+        $specification = new Specification('foo', 'bar');
+        $candidate = ['foo' => 'baz'];
+        $this->assertFalse($specification->isSatisfiedBy($candidate));
+    }
 }

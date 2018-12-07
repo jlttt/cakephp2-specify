@@ -6,10 +6,19 @@ namespace jlttt\Specify;
 
 final class Specification
 {
+    /**
+     * @var key associated to the specification
+     */
     private $key;
 
-    public function __construct($key) {
+    /**
+     * @param $value associated to the specification
+     */
+    private $value;
+
+    public function __construct($key, $value) {
         $this->key = $key;
+        $this->value = $value;
     }
 
     /**
@@ -17,6 +26,6 @@ final class Specification
      * @return boolean
      */
     public function isSatisfiedBy($candidate) {
-        return isset($candidate[$this->key]);
+        return isset($candidate[$this->key]) && $candidate[$this->key] === $this->value;
     }
 }
