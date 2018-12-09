@@ -25,10 +25,10 @@ interface SpecificationInterface
     /**
      * @return ConjunctiveSpecification
      */
-    public function and(SpecificationInterface $specification);
+    public function andX(SpecificationInterface $specification);
 
     /**
      * @return DisjunctiveSpecification
      */
-    public function or(SpecificationInterface $specification);
+    public function orX(SpecificationInterface $specification);
 }

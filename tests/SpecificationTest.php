@@ -37,25 +37,25 @@ final class SpecificationTest extends TestCase {
     }
 
     public function testConjonctiveSpecificationNotSatisfied() {
-        $specification = (new Specification('foo', 'bar'))->and(new Specification('fizz', 'buzz'));
+        $specification = (new Specification('foo', 'bar'))->andX(new Specification('fizz', 'buzz'));
         $candidate = ['foo' => 'bar'];
         $this->assertFalse($specification->isSatisfiedBy($candidate));
     }
 
     public function testConjunctiveSpecificationSatisfied() {
-        $specification = (new Specification('foo', 'bar'))->and((new Specification('fizz', 'buzz'))->not());
+        $specification = (new Specification('foo', 'bar'))->andX((new Specification('fizz', 'buzz'))->not());
         $candidate = ['foo' => 'bar'];
         $this->assertTrue($specification->isSatisfiedBy($candidate));
     }
 
     public function testDisjunctiveSpecificationSatisfied() {
-        $specification = (new Specification('foo', 'bar'))->or(new Specification('fizz', 'buzz'));
+        $specification = (new Specification('foo', 'bar'))->orX(new Specification('fizz', 'buzz'));
         $candidate = ['foo' => 'bar'];
         $this->assertTrue($specification->isSatisfiedBy($candidate));
     }
 
     public function testDisjunctiveSpecificationNotSatisfied() {
-        $specification = (new Specification('fizz', 'buzz'))->or((new Specification('foo', 'bar'))->not());
+        $specification = (new Specification('fizz', 'buzz'))->orX((new Specification('foo', 'bar'))->not());
         $candidate = ['foo' => 'bar'];
         $this->assertFalse($specification->isSatisfiedBy($candidate));
     }
@@ -73,7 +73,7 @@ final class SpecificationTest extends TestCase {
     }
 
     public function testBuildDQLConditionsFromConjunctiveSpecification() {
-        $specification = (new Specification('foo', 'bar'))->and(new Specification('fizz', 'buzz'));
+        $specification = (new Specification('foo', 'bar'))->andX(new Specification('fizz', 'buzz'));
         $expected = [
             ['foo' => 'bar'],
             ['fizz' =>'buzz'],
@@ -82,7 +82,7 @@ final class SpecificationTest extends TestCase {
     }
 
     public function testBuildDQLConditionsFromDisjunctiveSpecification() {
-        $specification = (new Specification('foo', 'bar'))->or(new Specification('fizz', 'buzz'));
+        $specification = (new Specification('foo', 'bar'))->orX(new Specification('fizz', 'buzz'));
         $expected = [
             'OR' => [
                 ['foo' => 'bar'],
