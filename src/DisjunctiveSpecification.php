@@ -11,7 +11,7 @@ final class DisjunctiveSpecification extends AbstractSpecification
      */
     private $specifications;
 
-    public function __construct(SpecificationInterface ...$specifications) {
+    protected function __construct(SpecificationInterface ...$specifications) {
         $this->specifications = $specifications;
     }
 
@@ -27,5 +27,21 @@ final class DisjunctiveSpecification extends AbstractSpecification
             },
             false
         );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function buildDqlConditions()
+    {
+        $conditions = array_reduce(
+            $this->specifications,
+            function($conditions, $specification) {
+                $conditions[] = $specification->buildDqlConditions();
+                return $conditions;
+            },
+            []
+        );
+        return ['OR' => $conditions];
     }
 }

@@ -28,4 +28,12 @@ final class Specification extends AbstractSpecification
     public function isSatisfiedBy($candidate) {
         return isset($candidate[$this->key]) && $candidate[$this->key] === $this->value;
     }
+
+    /**
+     * @return mixed
+     */
+    public function buildDqlConditions()
+    {
+        return [$this->key => $this->value];
+    }
 }

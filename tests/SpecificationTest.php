@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use jlttt\Specify\Specification;
+use jlttt\Specify\NegativeSpecification;
 
 final class SpecificationTest extends TestCase {
 
@@ -57,5 +58,37 @@ final class SpecificationTest extends TestCase {
         $specification = (new Specification('fizz', 'buzz'))->or((new Specification('foo', 'bar'))->not());
         $candidate = ['foo' => 'bar'];
         $this->assertFalse($specification->isSatisfiedBy($candidate));
+    }
+
+    public function testBuildDQLConditionsFromSimpleSpecification() {
+        $specification = new Specification('foo', 'bar');
+        $expected = ['foo' => 'bar'];
+        $this->assertEquals($expected, $specification->buildDqlConditions());
+    }
+
+    public function testBuildDQLConditionsFromNegativeSpecification() {
+        $specification = (new Specification('foo', 'bar'))->not();
+        $expected = ['NOT' => ['foo' => 'bar']];
+        $this->assertEquals($expected, $specification->buildDqlConditions());
+    }
+
+    public function testBuildDQLConditionsFromConjunctiveSpecification() {
+        $specification = (new Specification('foo', 'bar'))->and(new Specification('fizz', 'buzz'));
+        $expected = [
+            ['foo' => 'bar'],
+            ['fizz' =>'buzz'],
+        ];
+        $this->assertEquals($expected, $specification->buildDqlConditions());
+    }
+
+    public function testBuildDQLConditionsFromDisjunctiveSpecification() {
+        $specification = (new Specification('foo', 'bar'))->or(new Specification('fizz', 'buzz'));
+        $expected = [
+            'OR' => [
+                ['foo' => 'bar'],
+                ['fizz' =>'buzz'],
+            ]
+        ];
+        $this->assertEquals($expected, $specification->buildDqlConditions());
     }
 }

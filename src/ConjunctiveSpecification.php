@@ -11,7 +11,7 @@ final class ConjunctiveSpecification extends AbstractSpecification
      */
     private $specifications;
 
-    public function __construct(SpecificationInterface ...$specifications) {
+    protected function __construct(SpecificationInterface ...$specifications) {
         $this->specifications = $specifications;
     }
 
@@ -26,6 +26,21 @@ final class ConjunctiveSpecification extends AbstractSpecification
                 return $satisfied && $specification->isSatisfiedBy($candidate);
             },
             true
+        );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function buildDqlConditions()
+    {
+        return array_reduce(
+            $this->specifications,
+            function($conditions, $specification) {
+                $conditions[] = $specification->buildDqlConditions();
+                return $conditions;
+            },
+            []
         );
     }
 }
