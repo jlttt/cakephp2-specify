@@ -1,8 +1,5 @@
 <?php
-
-
 namespace jlttt\Specify;
-
 
 final class NegativeSpecification extends AbstractSpecification
 {
@@ -11,7 +8,8 @@ final class NegativeSpecification extends AbstractSpecification
      */
     private $specification;
 
-    protected function __construct(SpecificationInterface $specification) {
+    protected function __construct(SpecificationInterface $specification)
+    {
         $this->specification = $specification;
     }
 
@@ -19,7 +17,8 @@ final class NegativeSpecification extends AbstractSpecification
      * @param mixed $candidate
      * @return boolean
      */
-    public function isSatisfiedBy($candidate) {
+    public function isSatisfiedBy($candidate)
+    {
         return !$this->specification->isSatisfiedBy($candidate);
     }
 

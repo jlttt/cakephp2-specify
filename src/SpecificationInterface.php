@@ -1,8 +1,5 @@
 <?php
-
-
 namespace jlttt\Specify;
-
 
 interface SpecificationInterface
 {

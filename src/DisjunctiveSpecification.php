@@ -1,8 +1,5 @@
 <?php
-
-
 namespace jlttt\Specify;
-
 
 final class DisjunctiveSpecification extends AbstractSpecification
 {
@@ -11,7 +8,8 @@ final class DisjunctiveSpecification extends AbstractSpecification
      */
     private $specifications;
 
-    protected function __construct(SpecificationInterface ...$specifications) {
+    protected function __construct(SpecificationInterface ...$specifications)
+    {
         $this->specifications = $specifications;
     }
 
@@ -19,10 +17,11 @@ final class DisjunctiveSpecification extends AbstractSpecification
      * @param mixed $candidate
      * @return boolean
      */
-    public function isSatisfiedBy($candidate) {
+    public function isSatisfiedBy($candidate)
+    {
         return array_reduce(
             $this->specifications,
-            function($satisfied, $specification) use ($candidate) {
+            function ($satisfied, $specification) use ($candidate) {
                 return $satisfied || $specification->isSatisfiedBy($candidate);
             },
             false
@@ -36,7 +35,7 @@ final class DisjunctiveSpecification extends AbstractSpecification
     {
         $conditions = array_reduce(
             $this->specifications,
-            function($conditions, $specification) {
+            function ($conditions, $specification) {
                 $conditions[] = $specification->buildDqlConditions();
                 return $conditions;
             },

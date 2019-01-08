@@ -1,4 +1,5 @@
 <?php
+namespace jlttt\Tests;
 
 use PHPUnit\Framework\TestCase;
 use jlttt\Specify\Specification;
