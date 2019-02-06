@@ -1,4 +1,13 @@
 {
+    "name": "jlttt/cakephp2-specify",
+    "description": "Specification Pattern Implementation targeting CakePHP 2.x",
+    "authors": [
+        {
+            "name": "Jean-Luc Toutant",
+            "email": "jlttt@laposte.net"
+        }
+    ],
+    "minimum-stability": "dev",
     "autoload": {
       "psr-4" : { "jlttt\\Specify\\" : "src/"}
     },
