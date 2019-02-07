@@ -12,8 +12,11 @@ Specification Pattern Implementation targeting CakePHP 2.x
 
 use jlttt\Specification\Specification;
 
-$nonAdminActiveUsersRule = (new Specification('deleted', null))
-    ->andX((new Specification('group_slug', 'ADMIN'))->not());
+$activeUsersRule = new Specification('deleted', null);
+$adminUsersRole = new Specification('group_slug', 'ADMIN');
+$nonAdminUsersRole = $adminUsersRole->not();
+$nonAdminActiveUsersRule = $activeUsersRule
+    ->andX($nonAdminUsersRole);
 ```
 
 ### Use It For Condition...
@@ -27,9 +30,7 @@ $nonAdminActiveUsersRule = (new Specification('deleted', null))
  */ 
 
 if ($nonAdminActiveUsersRule->isSatisfiedBy($user)) {
-
     // ...
-    
 }
 ```
 
