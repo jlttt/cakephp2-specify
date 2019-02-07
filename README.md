@@ -52,7 +52,7 @@ if ($nonAdminActiveUsersRule->isSatisfiedBy($user)) {
 $nonAdminActiveUsers = $User->find(
     'all',
     array(
-        'conditions' => $nonAdminActiveUsersRule->buildDQL(),
+        'conditions' => $nonAdminActiveUsersRule->buildDqlConditions(),
    )
 );
 ```
