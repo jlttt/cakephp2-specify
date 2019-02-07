@@ -15,8 +15,7 @@ use jlttt\Specification\Specification;
 $activeUsersRule = new Specification('deleted', null);
 $adminUsersRole = new Specification('group_slug', 'ADMIN');
 $nonAdminUsersRole = $adminUsersRole->not();
-$nonAdminActiveUsersRule = $activeUsersRule
-    ->andX($nonAdminUsersRole);
+$nonAdminActiveUsersRule = $activeUsersRule->andX($nonAdminUsersRole);
 ```
 
 ### Use It For Condition...
