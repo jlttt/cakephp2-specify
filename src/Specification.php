@@ -25,7 +25,7 @@ final class Specification extends AbstractSpecification
      */
     public function isSatisfiedBy($candidate)
     {
-        return isset($candidate[$this->key]) && $candidate[$this->key] === $this->value;
+        return array_key_exists($this->key, $candidate) && $candidate[$this->key] === $this->value;
     }
 
     /**

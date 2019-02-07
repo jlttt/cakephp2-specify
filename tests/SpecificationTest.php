@@ -13,6 +13,12 @@ final class SpecificationTest extends TestCase {
         $this->assertTrue($specification->isSatisfiedBy($candidate));
     }
 
+    public function testSatisfiedBySimpleNullCandidate() {
+        $specification = new Specification('foo', null);
+        $candidate = ['foo' => null];
+        $this->assertTrue($specification->isSatisfiedBy($candidate));
+    }
+
     public function testNotSatisfiedBySimpleCandidateWithDifferentKey() {
         $specification = new Specification('foo', 'bar');
         $candidate = ['baz' => 'bar'];
